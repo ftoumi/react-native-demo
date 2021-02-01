@@ -1,28 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {SafeAreaView, StyleSheet, Text, View, Image, FlatList, StatusBar } from 'react-native'
+
+//import products from '../../assets/data/products.json'
 
 export default function HomeSceen() {
 
-  const products = [
-    {
-      name: 'Produit 1',
-      description: 'lorem ipsum dolor amet',
-      image: 'https://image.flaticon.com/icons/png/128/628/628324.png'
-    },
-    {
-      name: 'Produit 2',
-      description: 'lorem ipsum dolor amet',
-      image: 'https://image.flaticon.com/icons/png/128/1598/1598431.png'
-    }
-  ]
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    getProducts()
+  },[products])
+
+  const getProducts = () => {
+    fetch('https://fr-en.openfoodfacts.org/category/pizzas/1.json')
+    .then((response) => response.json())
+    .then((json) => setProducts(json.products))
+    .catch((error) => console.error(error))
+    //.finally(() => setLoading(false));
+  }
 
   const ProductItem = ({product}) => {
     return (
       <View style={styles.productLine}>
-        <Image source={{ uri: product.image }} style={{ width: 50, height: 50, marginRight: 12}} />
+        <Image source={{ uri: product.image_url }} style={{ width: 50, height: 50, marginRight: 12}} />
         <View>
-          <Text style={{fontSize: 18, fontWeight: '700', marginBottom: 6}}>{product.name}</Text>
-          <Text style={{ color: 'gray'}}>{product.description}</Text>
+          <Text style={{fontSize: 18, fontWeight: '700', marginBottom: 6}}>{product.product_name}</Text>
+          <Text style={{ color: 'gray'}}>{product.nutriscore_score}</Text>
         </View>
       </View>
     )
@@ -32,7 +35,7 @@ export default function HomeSceen() {
     <SafeAreaView>
       <FlatList 
         data={products}
-        keyExtractor={item => item.name}
+        keyExtractor={item => `product-${item.sortkey}`}
         renderItem={({item}) => <ProductItem product={item} />}
         ListHeaderComponent={<Text style={{ fontSize: 24, padding: 20}}>Mes produits</Text>}
       />
