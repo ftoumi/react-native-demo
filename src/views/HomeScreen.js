@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import {SafeAreaView, StyleSheet, Text, View, Image, FlatList, StatusBar } from 'react-native'
+import {SafeAreaView, StyleSheet, Text, View, Image, FlatList, TouchableOpacity } from 'react-native'
 
 //import products from '../../assets/data/products.json'
 
-export default function HomeSceen() {
+export default function HomeScreen({ navigation }) {
 
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     getProducts()
-  },[products])
+  },[])
 
   const getProducts = () => {
     fetch('https://fr-en.openfoodfacts.org/category/pizzas/1.json')
@@ -21,13 +21,16 @@ export default function HomeSceen() {
 
   const ProductItem = ({product}) => {
     return (
-      <View style={styles.productLine}>
-        <Image source={{ uri: product.image_url }} style={{ width: 50, height: 50, marginRight: 12}} />
-        <View>
-          <Text style={{fontSize: 18, fontWeight: '700', marginBottom: 6}}>{product.product_name}</Text>
-          <Text style={{ color: 'gray'}}>{product.nutriscore_score}</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('Details', { product: product })}>
+        <View style={styles.productLine}>
+          <Image source={{ uri: product.image_url }} style={{ width: 50, height: 50, marginRight: 12}} />
+          <View>
+            <Text style={{fontSize: 18, fontWeight: '700', marginBottom: 6}}>{product.product_name}</Text>
+            <Text style={{ color: 'gray'}}>{product.nutriscore_score}</Text>
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
+      
     )
   }
 
