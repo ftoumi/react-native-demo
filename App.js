@@ -84,7 +84,7 @@ export default function App() {
 
         <Stack.Screen 
           name="Favoris" 
-          component={ScannerScreen} 
+          component={FavScreen} 
           options={{
             tabBarLabel: "Favoris",
             tabBarIcon: (tabInfo) => <Ionicons name="heart" size={24} color={tabInfo.color} />
