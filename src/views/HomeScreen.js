@@ -52,19 +52,20 @@ export default function HomeScreen({ navigation }) {
   }
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{flex:1}}>
+      <Pressable 
+          style={{position: 'absolute', bottom: 20, right: 20, zIndex:2}}
+          onPress={() => navigation.navigate('AddProduct')}
+        >
+        <Ionicons name="add-circle" size={64} color="black" />
+      </Pressable>
       <FlatList 
         data={products}
         keyExtractor={item => `product-${item.sortkey}`}
         renderItem={({item}) => <ProductItem product={item} />}
         ListHeaderComponent={<HeaderComponent />}
       />
-      <Pressable 
-        style={{position: 'absolute', bottom: 20, right: 20}}
-        onPress={() => navigation.navigate('AddProduct')}
-      >
-        <Ionicons name="add-circle" size={64} color="black" />
-      </Pressable>
+      
     </SafeAreaView>
   )
 }

@@ -13,7 +13,7 @@ import FavScreen from './src/views/FavScreen'
 
 import * as theme from './src/config/theme'
 
-const ModalStack = createStackNavigator()
+const Modal = createStackNavigator()
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
 
@@ -28,16 +28,27 @@ export default function App() {
     )
   }
 
-  const MainStack = () => {
+  
+  const HomeStack = () => {
     return (
       <Stack.Navigator>
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="Details" component={DetailsScreen} />
+      </Stack.Navigator>
+    )
+  }
 
+  const MainStack = () => {
+    return (
+      <Modal.Navigator mode="modal">
+
+        <Stack.Screen name="Home" component={HomeStack}  options={{headerShown: false, }} />
+        
         <Stack.Screen 
           name="AddProduct" 
           component={AddProduct} 
           options={{
+            headerShown: false, 
             cardOverlayEnabled: true,
             cardStyle: {
               backgroundColor: 'transparent',
@@ -49,10 +60,10 @@ export default function App() {
             }
           }}
         />
-
-      </Stack.Navigator>
+      </Modal.Navigator>
     )
   }
+
 
   return (
     <NavigationContainer>
