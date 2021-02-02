@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import {SafeAreaView, StyleSheet, Text, View, Image, FlatList, TouchableOpacity } from 'react-native'
+import {SafeAreaView, StyleSheet, Text, View, Image, FlatList, Pressable } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
 
 //import products from '../../assets/data/products.json'
 
@@ -21,7 +22,7 @@ export default function HomeScreen({ navigation }) {
 
   const ProductItem = ({product}) => {
     return (
-      <TouchableOpacity onPress={() => navigation.navigate('Details', { product: product })}>
+      <Pressable onPress={() => navigation.navigate('Details', { product: product })}>
         <View style={styles.productLine}>
           <Image source={{ uri: product.image_url }} style={{ width: 50, height: 50, marginRight: 12}} />
           <View>
@@ -29,7 +30,7 @@ export default function HomeScreen({ navigation }) {
             <Text style={{ color: 'gray'}}>{product.nutriscore_score}</Text>
           </View>
         </View>
-      </TouchableOpacity>
+      </Pressable>
       
     )
   }
@@ -42,6 +43,12 @@ export default function HomeScreen({ navigation }) {
         renderItem={({item}) => <ProductItem product={item} />}
         ListHeaderComponent={<Text style={{ fontSize: 24, padding: 20}}>Mes produits</Text>}
       />
+      <Pressable 
+        style={{position: 'absolute', bottom: 20, right: 20}}
+        onPress={() => navigation.navigate('AddProduct')}
+      >
+        <Ionicons name="add-circle" size={64} color="black" />
+      </Pressable>
     </SafeAreaView>
   )
 }
