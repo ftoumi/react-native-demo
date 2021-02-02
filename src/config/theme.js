@@ -9,5 +9,21 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: DEFAULT_COLOR,
     padding: 20,
+  },
+  tabBar: {
+    backgroundColor: '#FFCC00',
+    paddingTop: 5
+  },
+  scanTab: {
+    backgroundColor: '#FFCC00',
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  tabBarLabel: {
+    paddingVertical: 5,
+    fontWeight: '700'
   }
 })
