@@ -4,6 +4,9 @@ import { Ionicons } from '@expo/vector-icons'
 
 //import products from '../../assets/data/products.json'
 
+import productIcon from '../../assets/icons/new-product.png'
+
+
 export default function HomeScreen({ navigation }) {
 
   const [products, setProducts] = useState([]);
@@ -12,12 +15,25 @@ export default function HomeScreen({ navigation }) {
     getProducts()
   },[])
 
+  const productIconURI = Image.resolveAssetSource(productIcon)
+
+
   const getProducts = () => {
     fetch('https://fr-en.openfoodfacts.org/category/pizzas/1.json')
     .then((response) => response.json())
     .then((json) => setProducts(json.products))
     .catch((error) => console.error(error))
     //.finally(() => setLoading(false));
+  }
+
+  const HeaderComponent = () => {
+    return (
+      <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 20}}>
+        <Image source={{ uri: productIconURI.uri }} style={{width: 30, height: 30}} />
+        <Text style={{ fontSize: 24, padding: 20}}>Mes produits</Text>
+      </View>
+      
+    )
   }
 
   const ProductItem = ({product}) => {
@@ -41,7 +57,7 @@ export default function HomeScreen({ navigation }) {
         data={products}
         keyExtractor={item => `product-${item.sortkey}`}
         renderItem={({item}) => <ProductItem product={item} />}
-        ListHeaderComponent={<Text style={{ fontSize: 24, padding: 20}}>Mes produits</Text>}
+        ListHeaderComponent={<HeaderComponent />}
       />
       <Pressable 
         style={{position: 'absolute', bottom: 20, right: 20}}
