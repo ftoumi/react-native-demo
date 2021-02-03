@@ -7,8 +7,6 @@ export const TEXT_COLOR = "white"
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: DEFAULT_COLOR,
-    padding: 20,
   },
   tabBar: {
     backgroundColor: '#FFCC00',
@@ -25,5 +23,6 @@ export const styles = StyleSheet.create({
   tabBarLabel: {
     paddingVertical: 5,
     fontWeight: '700'
-  }
+  },
+  listTitle: {fontSize: 18, fontWeight: '700', marginBottom: 6}
 })

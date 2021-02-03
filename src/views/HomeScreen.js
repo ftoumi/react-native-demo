@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import {SafeAreaView, StyleSheet, Text, View, Image, FlatList, Pressable } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
+import { SharedElement } from 'react-navigation-shared-element'
 
 //import products from '../../assets/data/products.json'
-
+import * as theme from '../config/theme'
 import productIcon from '../../assets/icons/new-product.png'
 
 
@@ -40,9 +41,13 @@ export default function HomeScreen({ navigation }) {
     return (
       <Pressable onPress={() => navigation.navigate('Details', { product: product })}>
         <View style={styles.productLine}>
-          <Image source={{ uri: product.image_url }} style={{ width: 50, height: 50, marginRight: 12}} />
+          <SharedElement id={`element-${product.sortkey}-image`}>
+            <Image source={{ uri: product.image_url }} style={{ width: 50, height: 50, marginRight: 12}} />
+          </SharedElement>
           <View>
-            <Text style={{fontSize: 18, fontWeight: '700', marginBottom: 6}}>{product.product_name}</Text>
+            <SharedElement id={`element-${product.sortkey}-title`}>
+              <Text style={theme.styles.listTitle}>{product.product_name}</Text>
+            </SharedElement>
             <Text style={{ color: 'gray'}}>{product.nutriscore_score}</Text>
           </View>
         </View>

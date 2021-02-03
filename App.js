@@ -3,7 +3,9 @@ import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element'
 import { Ionicons } from '@expo/vector-icons'
+
 
 import HomeScreen from './src/views/HomeScreen'
 import DetailsScreen from './src/views/DetailsScreen'
@@ -15,10 +17,17 @@ import * as theme from './src/config/theme'
 
 const Modal = createStackNavigator()
 const Stack = createStackNavigator()
+const StackShared = createSharedElementStackNavigator()
 const Tab = createBottomTabNavigator()
 
 
 export default function App() {
+
+  const screenFade = ({ current }) => ({
+    cardStyle: {
+      opacity: current.progess
+    }
+  })
 
   const ScanTabIcon = (tabInfo) => {
     return (
@@ -31,10 +40,18 @@ export default function App() {
   
   const HomeStack = () => {
     return (
-      <Stack.Navigator>
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
-      </Stack.Navigator>
+      <StackShared.Navigator>
+        <StackShared.Screen 
+          name="HomeScreen" 
+          component={HomeScreen}  
+          options={{ cardStyleInterpolator: screenFade}}  
+        />
+        <StackShared.Screen 
+          name="Details" 
+          component={DetailsScreen} 
+          options={{ cardStyleInterpolator: screenFade}}  
+        />
+      </StackShared.Navigator>
     )
   }
 
