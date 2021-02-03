@@ -5,6 +5,7 @@ import * as Animatable from 'react-native-animatable'
 const { width, height } = Dimensions.get('screen')
 
 import * as theme from '../config/theme'
+import { NavigationHelpersContext } from '@react-navigation/native'
 
 export default function DetailsScreen({ route }) {
   const { product } = route.params
@@ -21,6 +22,7 @@ export default function DetailsScreen({ route }) {
         <Text style={{ fontSize: 28}}>{product.product_name}</Text>
       </Animatable.View>
       
+
 
     </View>
   )

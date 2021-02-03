@@ -12,6 +12,7 @@ import DetailsScreen from './src/views/DetailsScreen'
 import AddProduct from './src/views/AddProduct'
 import ScannerScreen from './src/views/ScannerScreen'
 import FavScreen from './src/views/FavScreen'
+import PhotoScreen from './src/views/PhotoScreen'
 
 import * as theme from './src/config/theme'
 
@@ -85,7 +86,8 @@ export default function App() {
   return (
     <NavigationContainer>
 
-      <Tab.Navigator 
+      <Tab.Navigator
+        initialRouteName="Photo" 
         tabBarOptions={{
           tabStyle: theme.styles.tabBar,
           labelStyle: theme.styles.tabBarLabel,
@@ -116,6 +118,15 @@ export default function App() {
           options={{
             tabBarLabel: "Favoris",
             tabBarIcon: (tabInfo) => <Ionicons name="heart" size={24} color={tabInfo.color} />
+          }}
+        />
+
+        <Stack.Screen 
+          name="Photo" 
+          component={PhotoScreen} 
+          options={{
+            tabBarLabel: "Photo",
+            tabBarIcon: (tabInfo) => <Ionicons name="camera" size={24} color={tabInfo.color} />
           }}
         />
 
