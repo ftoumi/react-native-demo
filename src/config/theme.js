@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native'
-const { width, height } = Dimensions.get('screen')
+export const { width, height } = Dimensions.get('screen')
 
 export const DEFAULT_COLOR = "#00202B"
 export const TEXT_COLOR = "white"

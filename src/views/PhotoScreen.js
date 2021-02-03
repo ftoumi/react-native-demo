@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Alert, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Alert, Image, SafeAreaView } from 'react-native';
 import { Camera } from 'expo-camera'
 import * as MediaLibrary from 'expo-media-library'
 import { Ionicons } from '@expo/vector-icons'
@@ -37,12 +37,23 @@ export default function PhotoScreen({navigation}) {
     } else {
       await MediaLibrary.addAssetsToAlbumAsync(asset, album, false)
     }
+    
+    setUserPhoto(data.uri)
+  }
 
-    console.log(asset)
+  const PreviewImage = () => {
+    const uriSource = userPhoto
+    setTimeout(function(){ setUserPhoto(null) }, 3000)
+    
+    return (
+      <View>
+        <Image source={{ uri: userPhoto }} style={{width: 50, height: 80, borderWidth: 1, borderColor: 'white'}} />
+      </View>
+    )
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Camera 
         ref={ref => (camera = ref)}
         style={styles.camera} 
@@ -51,17 +62,25 @@ export default function PhotoScreen({navigation}) {
       >
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'flex-end'}}>
          
+          <View style={{flex: 1, padding: 20, justifyContent: 'center', width: theme.width}}>
+            {(userPhoto) && <PreviewImage />}
+          </View>
 
-          <TouchableOpacity
-            onPress={takePicture} 
-            style={{ borderWidth: 4, borderColor: 'white', width: 80, height: 80, borderRadius: 50, alignItems: 'center', justifyContent:'center', marginBottom: 60 }}>
-            <Ionicons name="camera" size={42} color="white" />
-          </TouchableOpacity>
+          <View style={{flex: 4}}></View>
+
+          <View style={{flex: 2}}>
+            <TouchableOpacity
+              onPress={takePicture} 
+              style={{ borderWidth: 4, borderColor: 'white', width: 80, height: 80, borderRadius: 50, alignItems: 'center', justifyContent:'center', marginBottom: 60 }}>
+              <Ionicons name="camera" size={42} color="white" />
+            </TouchableOpacity>
+          </View>
+          
 
         </View>
 
       </Camera>
-    </View>
+    </SafeAreaView>
   );
 }
 
