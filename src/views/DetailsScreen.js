@@ -28,12 +28,5 @@ export default function DetailsScreen({ route }) {
 
 DetailsScreen.sharedElements = (route) => {
   const { product } = route.params
-  return [
-    {
-      id: `element-${product.sortkey}-title`
-    },
-    {
-      id: `element-${product.sortkey}-image`
-    }
-  ]
+  return [`element-${product.sortkey}-image`]
 }

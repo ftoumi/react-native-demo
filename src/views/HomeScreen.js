@@ -45,9 +45,9 @@ export default function HomeScreen({ navigation }) {
             <Image source={{ uri: product.image_url }} style={{ width: 50, height: 50, marginRight: 12}} />
           </SharedElement>
           <View>
-            <SharedElement id={`element-${product.sortkey}-title`}>
+      
               <Text style={theme.styles.listTitle}>{product.product_name}</Text>
-            </SharedElement>
+    
             <Text style={{ color: 'gray'}}>{product.nutriscore_score}</Text>
           </View>
         </View>
