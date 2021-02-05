@@ -2,7 +2,7 @@
 [react-navigation-shared-element V5](https://github.com/IjzerenHein/react-navigation-shared-element/blob/master/docs/Navigation5.md)
 **Bien Installer la version compatible avec react navigation V5 :**
 ```
-yarn add react-navigation-shared-element@prerelease
+yarn add react-navigation-shared-element@prerelease react-native-shared-element
 ```
 **Egalement ajouter en devDependencies**
 ```
